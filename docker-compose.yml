@@ -1,0 +1,49 @@
+nginx:
+  build: ./nginx
+  ports:
+    - 8000:80
+  links:
+    - php
+  volumes_from:
+    - app
+
+php:
+  build: ./php/
+  expose:
+    - 9000
+  links:
+    - mysql
+  volumes_from:
+    - app
+
+app:
+  image: php:8.0-fpm
+  volumes:
+    - ./matcha/public:/var/www/html
+    - ./matcha:/var/www
+  command: "true"
+
+mysql:
+  image: mysql:latest
+  volumes_from:
+    - data
+  environment:
+    MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    MYSQL_DATABASE: ${MYSQL_DATABASE}
+    MYSQL_USER: ${MYSQL_USER}
+    MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+data:
+  image: mysql:latest
+  volumes:
+    - /var/lib/mysql
+  command: "true"
+
+phpmyadmin:
+  image: phpmyadmin/phpmyadmin
+  ports:
+    - 8080:80
+  links:
+    - mysql
+  environment:
+    PMA_HOST: mysql
