@@ -6,8 +6,10 @@
     "jenssegers/blade": "^1.4",
     "php-di/slim-bridge": "^3.0",
     "ext-json": "*",
+    "php": "^8.0",
     "zeuxisoo/slim-whoops": "^0.7.3",
-    "vlucas/phpdotenv": "^5.4"
+    "vlucas/phpdotenv": "^5.4",
+    "ext-mysqli": "*"
   },
   "autoload": {
     "files": [

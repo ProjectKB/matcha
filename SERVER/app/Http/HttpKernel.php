@@ -20,10 +20,10 @@ class HttpKernel extends Kernel
      */
     public array $middlewareGroups = [
         'api' => [
-            ExampleAfterMiddleware::class,
+//            ExampleAfterMiddleware::class,
         ],
         'web' => [
-            ExampleBeforeMiddleware::class,
+//            ExampleBeforeMiddleware::class,
         ],
     ];
 }
