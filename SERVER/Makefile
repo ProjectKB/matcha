@@ -15,7 +15,7 @@ build:
 install:
 	@$(CONNECT) $(PHP) sh -c 'cd .. && composer install && composer update'
 
-setup: build install migrate seed
+setup: build install dump migrate seed
 
 run:
 	@open http://localhost:8000/
