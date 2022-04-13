@@ -21,7 +21,7 @@ admin:
 	@open http://localhost:8080/
 
 db:
-	@$(CONNECT) $(DB) $(BASH)
+	@$(CONNECT) $(DB) mysql -u root -p
 
 nginx:
 	@$(CONNECT) $(NGINX) $(BASH)
