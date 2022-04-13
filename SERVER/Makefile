@@ -1,5 +1,3 @@
-CONNECT=docker exec -it
-
 PHP=docker_php_1
 DB=docker_mysql_1
 NGINX=docker_nginx_1
@@ -9,10 +7,15 @@ PHINX_PATH=cd .. && ./vendor/bin/phinx
 MIGR_CONF=-c ./config/migrations.php
 
 BASH=/bin/bash
-
+CONNECT=docker exec -it
 
 build:
 	@cd docker && docker-compose up -d
+
+install:
+	@$(CONNECT) $(PHP) sh -c 'cd .. && composer install && composer update'
+
+setup: build install migrate seed
 
 run:
 	@open http://localhost:8000/
@@ -30,7 +33,7 @@ php:
 	@$(CONNECT) $(PHP) $(BASH)
 
 dump:
-	@composer dump-autoload -o
+	@$(CONNECT) $(PHP) sh -c 'cd .. && composer dump-autoload -o'
 
 migration:
 ifndef name
@@ -68,4 +71,4 @@ re: clean build
 
 reAll: cleanAll build
 
-.PHONY: build run db stop clean re php nginx admin cleanAll reAll migration migrate rollback dump seeders seed
+.PHONY: build run db stop clean re php nginx admin cleanAll reAll migration migrate rollback dump seeders seed install setup

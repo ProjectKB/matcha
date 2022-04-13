@@ -16,7 +16,7 @@ class UserTableSeeder extends AbstractSeed
      */
     public function run()
     {
-        $users = factory(User::class, 10)->make([
+        $users = factory(User::class, 10)->create([
             'first_name' => 'johnny jim dan joe'
         ]);
 
