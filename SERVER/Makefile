@@ -1,3 +1,15 @@
+CONNECT=docker exec -it
+
+PHP=docker_php_1
+DB=docker_mysql_1
+NGINX=docker_nginx_1
+ADMIN=docker_phpmyadmin_1
+
+PHINX_PATH=cd .. && ./vendor/bin/phinx
+MIGR_CONF=-c ./config/migrations.php
+
+BASH=/bin/bash
+
 
 build:
 	@cd docker && docker-compose up -d
@@ -9,26 +21,42 @@ admin:
 	@open http://localhost:8080/
 
 db:
-	@docker exec -it docker_mysql_1 /bin/bash
+	@$(CONNECT) $(DB) $(BASH)
 
 nginx:
-	@docker exec -it docker_nginx_1 /bin/bash
+	@$(CONNECT) $(NGINX) $(BASH)
 
 php:
-	@docker exec -it docker_php_1 /bin/bash
+	@$(CONNECT) $(PHP) $(BASH)
+
+dump:
+	@composer dump-autoload -o
 
 migration:
 ifndef name
 	$(error Use this command as follow: "make migration name=ExampleTableMigration")
 else
-	@./vendor/bin/phinx create $(name) -c ./config/migrations.php
+	@$(CONNECT) $(PHP) sh -c '$(PHINX_PATH) create $(name) $(MIGR_CONF)'
 endif
 
 migrate:
-	@docker exec -it docker_php_1 sh -c 'cd .. && ./vendor/bin/phinx migrate -c ./config/migrations.php'
+	@$(CONNECT) $(PHP) sh -c '$(PHINX_PATH) migrate $(MIGR_CONF)'
+
+rollback:
+	@$(CONNECT) $(PHP) sh -c '$(PHINX_PATH) rollback $(MIGR_CONF)'
+
+seeders:
+ifndef name
+	$(error Use this command as follow: "make seeders name=ExampleTableSeeder")
+else
+	@$(CONNECT) $(PHP) sh -c '$(PHINX_PATH) seed:create $(name) $(MIGR_CONF)'
+endif
+
+seed:
+	@$(CONNECT) $(PHP) sh -c '$(PHINX_PATH) seed:run $(MIGR_CONF)'
 
 stop:
-	@docker stop docker_nginx_1 docker_php_1 docker_phpmyadmin_1 docker_mysql_1
+	@docker stop $(NGINX) $(PHP) $(ADMIN) $(DB)
 
 clean: stop
 	@cd docker && docker-compose rm -v
@@ -40,4 +68,4 @@ re: clean build
 
 reAll: cleanAll build
 
-.PHONY: build run db stop clean re php nginx admin cleanAll reAll migration migrate
+.PHONY: build run db stop clean re php nginx admin cleanAll reAll migration migrate rollback dump seeders seed

@@ -8,7 +8,7 @@ class ApiController
 {
     public function index($response, User $user)
     {
-        $user->find(1);
+        $user->find(75);
         $response->getBody()->write(json_encode($user, JSON_PRETTY_PRINT));
 
         return $response;

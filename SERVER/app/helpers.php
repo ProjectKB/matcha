@@ -1,7 +1,24 @@
 <?php
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+
+if (!function_exists('collect')) {
+    function collect($items)
+    {
+        return new Collection($items);
+    }
+}
+
+if (!function_exists('factory')) {
+    function factory($model, $count = 1)
+    {
+        $factory = new Factory;
+
+        return $factory($model, $count);
+    }
+}
 
 if (!function_exists('env')) {
     function env($key, $default)
