@@ -1,8 +1,19 @@
 <?php
 
+use App\Support\Redirect;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+
+
+if (!function_exists('redirect')) {
+    function redirect(string $to)
+    {
+        $redirect = app()->resolve(Redirect::class);
+
+        return $redirect($to);
+    }
+}
 
 if (!function_exists('collect')) {
     function collect($items)
@@ -105,6 +116,13 @@ if (!function_exists('dd')) {
         }, func_get_args());
 
         die;
+    }
+}
+
+if (!function_exists('has_record')) {
+    function has_record($response)
+    {
+        return mysqli_num_rows($response);
     }
 }
 

@@ -5,7 +5,7 @@ namespace App\Providers;
 use App\Support\View;
 use Slim\Psr7\Factory\ResponseFactory;
 
-class ViewServiceProvider extends ServiceProvider
+class BladeServiceProvider extends ServiceProvider
 {
     public function register()
     {

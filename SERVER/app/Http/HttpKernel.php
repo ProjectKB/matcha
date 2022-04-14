@@ -2,8 +2,7 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\ExampleAfterMiddleware;
-use App\Http\Middleware\ExampleBeforeMiddleware;
+use App\Http\Middleware\RouteContextMiddleware;
 use Boot\Foundation\HttpKernel as Kernel;
 
 class HttpKernel extends Kernel
@@ -13,17 +12,15 @@ class HttpKernel extends Kernel
      *
      * @var array
      */
-    public array $middleware = [];
+    public array $middleware = [
+        RouteContextMiddleware::class,
+    ];
 
     /**
      * Route Group Middleware
      */
     public array $middlewareGroups = [
-        'api' => [
-//            ExampleAfterMiddleware::class,
-        ],
-        'web' => [
-//            ExampleBeforeMiddleware::class,
-        ],
+        'api' => [],
+        'web' => [],
     ];
 }

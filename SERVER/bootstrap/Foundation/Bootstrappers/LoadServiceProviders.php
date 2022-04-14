@@ -8,6 +8,13 @@ class LoadServiceProviders extends Bootstrapper
 {
     public function boot()
     {
-        ServiceProvider::setup($this->app, config('app.providers'));
+        $app = $this->app;
+        $providers = config('app.providers');
+
+        if ($app->bootedViaHttpRequest()) {
+            $providers = [...$providers, \App\Providers\RouteServiceProvider::class];
+        }
+
+        ServiceProvider::setup($app, $providers);
     }
 }

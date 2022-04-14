@@ -8,7 +8,28 @@ abstract class BaseModel
 {
     final public function find($id)
     {
-        $response = DB::$db->query("SELECT * FROM " . $this::$tableName . " WHERE id=${id}");
+        $response = DB::$db->query("SELECT * FROM " . $this->getTableName() . " WHERE id=${id}");
+        $fetchedValues = mysqli_fetch_assoc($response);
+
+        return $this->make($fetchedValues);
+    }
+
+    final public function find_by(array $columns)
+    {
+        $i = 0;
+        $size = count($columns);
+        $query_columns = "";
+
+        foreach ($columns as $key => $value) {
+            $query_columns .= (++$i != $size) ? "{$key}='{$value}' AND " : "{$key}='{$value}'";
+        }
+
+        $response = DB::$db->query("SELECT * FROM " . $this->getTableName() . " WHERE {$query_columns}");
+
+        if (!has_record($response)) {
+            return false;
+        }
+
         $fetchedValues = mysqli_fetch_assoc($response);
 
         return $this->make($fetchedValues);
@@ -21,7 +42,9 @@ abstract class BaseModel
             . implode(',', array_keys($elements)) . ") VALUES ("
             . implode(',', $values) . ")";
 
-        return DB::$db->query($query) ? $this->make($elements) : NULL;
+        DB::$db->query($query);
+
+        return $this->make($elements);
     }
 
     final public function make(array $fetchedValues)

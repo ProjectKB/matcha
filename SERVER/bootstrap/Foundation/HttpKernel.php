@@ -4,6 +4,7 @@ namespace Boot\Foundation;
 
 use Boot\Foundation\Bootstrappers\LoadAliases;
 use Boot\Foundation\Bootstrappers\LoadDebuggingPage;
+use Boot\Foundation\Bootstrappers\LoadEnvironmentDetector;
 use Boot\Foundation\Bootstrappers\LoadEnvironmentVariables;
 use Boot\Foundation\Bootstrappers\LoadHttpMiddleware;
 use Boot\Foundation\Bootstrappers\LoadServiceProviders;
@@ -22,10 +23,11 @@ class HttpKernel extends Kernel
      */
     public array $middlewareGroups = [
         'api' => [],
-        'web' => [],
+        'web' => []
     ];
 
-    public array $bootstrap = [
+    public array $bootstrappers = [
+        LoadEnvironmentDetector::class,
         LoadEnvironmentVariables::class,
         LoadDebuggingPage::class,
         LoadAliases::class,

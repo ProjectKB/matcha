@@ -10,7 +10,6 @@ class RouteServiceProvider extends ServiceProvider
     public function register()
     {
         Route::setup($this->app);
-
         $this->bind(RouteGroup::class, fn () => new RouteGroup($this->app));
     }
 
@@ -28,11 +27,11 @@ class RouteServiceProvider extends ServiceProvider
 
         return $api->routes($get)->prefix('/api')->middleware([
             ...$add['api'],
-            ...$add['global'],
+            ...$add['global']
         ]);
     }
 
-    public function webRouteGroup(): RouteGroup
+    public function webRouteGroup() : RouteGroup
     {
         $get = routes_path('web.php');
         $add = $this->resolve('middleware');
@@ -40,7 +39,7 @@ class RouteServiceProvider extends ServiceProvider
 
         return $web->routes($get)->prefix('')->middleware([
             ...$add['web'],
-            ...$add['global'],
+            ...$add['global']
         ]);
     }
 }

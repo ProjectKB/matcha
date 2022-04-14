@@ -4,8 +4,9 @@ return [
     'app' => env('APP_NAME', 'Matcha'),
     'providers' => [
         \App\Providers\DatabaseServiceProvider::class,
-        \App\Providers\RouteServiceProvider::class,
-        \App\Providers\ViewServiceProvider::class,
+        \App\Providers\BladeServiceProvider::class,
     ],
-    'aliases' => []
+    'aliases' => [
+        'Auth' => \App\Support\Auth::class,
+    ]
 ];
