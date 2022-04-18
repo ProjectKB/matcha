@@ -6,7 +6,7 @@
 
 @section('content')
     <div>
-        <form method="POST" action="/store">
+        <form method="POST" action="/login">
             <h1>Login</h1>
             <input
                     required

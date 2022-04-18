@@ -42,6 +42,12 @@ class Auth
 
     public static function user()
     {
+        $userInSession = isset($_SESSION['user']);
+
+        if (!$userInSession) {
+            return false;
+        }
+
         $user = new User();
         return $user->find_by($_SESSION['user']);
     }
