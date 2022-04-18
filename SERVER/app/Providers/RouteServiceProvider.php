@@ -2,15 +2,14 @@
 
 namespace App\Providers;
 
-use App\Support\Route;
 use App\Support\RouteGroup;
+use Boot\Foundation\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        Route::setup($this->app);
-        $this->bind(RouteGroup::class, fn () => new RouteGroup($this->app));
+
     }
 
     public function boot()

@@ -4,6 +4,7 @@ NGINX=docker_nginx_1
 ADMIN=docker_phpmyadmin_1
 
 PHINX_PATH=cd .. && ./vendor/bin/phinx
+CACHE_PATH=cd ../storage/cache
 MIGR_CONF=-c ./config/migrations.php
 
 BASH=/bin/bash
@@ -34,6 +35,9 @@ php:
 
 dump:
 	@$(CONNECT) $(PHP) sh -c 'cd .. && composer dump-autoload -o'
+
+cache:
+	@$(CONNECT) $(PHP) sh -c 'rm -rf $(CACHE_PATH)/*'
 
 migration:
 ifndef name
@@ -71,4 +75,4 @@ re: clean build
 
 reAll: cleanAll build
 
-.PHONY: build run db stop clean re php nginx admin cleanAll reAll migration migrate rollback dump seeders seed install setup
+.PHONY: build run db stop clean re php nginx admin cleanAll reAll migration migrate rollback dump seeders seed install setup cache

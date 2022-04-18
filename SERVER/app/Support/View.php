@@ -8,20 +8,20 @@ use Psr\Http\Message\ResponseFactoryInterface;
 
 class View
 {
-    public $response;
+    protected $blade;
+    protected $response;
 
-    public function __construct(ResponseFactoryInterface $factory)
+    public function __construct(Blade $blade, ResponseFactoryInterface $factory)
     {
+        $this->blade = $blade;
         $this->response = $factory->createResponse(200, 'Success');
     }
 
     public function __invoke(string $template = '', array $with = []) : ResponseInterface
     {
-        $this->response->getBody()->write(
-            (new Blade(config('blade.views'), config('blade.cache')))
-                ->make($template, $with)
-                ->render()
-        );
+        $view = $this->blade->make($template, $with)->render();
+
+        $this->response->getBody()->write($view);
 
         return $this->response;
     }

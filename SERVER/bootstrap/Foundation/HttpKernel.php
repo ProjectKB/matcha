@@ -3,6 +3,7 @@
 namespace Boot\Foundation;
 
 use Boot\Foundation\Bootstrappers\LoadAliases;
+use Boot\Foundation\Bootstrappers\LoadBladeTemplates;
 use Boot\Foundation\Bootstrappers\LoadDebuggingPage;
 use Boot\Foundation\Bootstrappers\LoadEnvironmentDetector;
 use Boot\Foundation\Bootstrappers\LoadEnvironmentVariables;
@@ -32,6 +33,7 @@ class HttpKernel extends Kernel
         LoadDebuggingPage::class,
         LoadAliases::class,
         LoadHttpMiddleware::class,
+        LoadBladeTemplates::class,
         LoadServiceProviders::class,
     ];
 }

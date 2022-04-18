@@ -119,6 +119,13 @@ if (!function_exists('dd')) {
     }
 }
 
+if (!function_exists('asset')) {
+    function asset($path)
+    {
+        return env('APP_URL') . "/{$path}";
+    }
+}
+
 if (!function_exists('has_record')) {
     function has_record($response)
     {
@@ -160,7 +167,6 @@ if (!function_exists('config')) {
 
             data_set($config, Str::before($file, '.php'), require config_path($file));
         }
-
         return data_get($config, $path);
     }
 }

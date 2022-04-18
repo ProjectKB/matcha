@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Model\User;
+use App\Support\RequestInput;
 use Auth;
 use App\Support\View;
 

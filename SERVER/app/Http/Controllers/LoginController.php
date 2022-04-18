@@ -16,7 +16,6 @@ class LoginController
     public function store(RequestInput $input)
     {
         $successful = Auth::attempt($input->email, sha1($input->password));
-
         if (!$successful) {
             dd("Unsuccessful Login Attempt");
         }
