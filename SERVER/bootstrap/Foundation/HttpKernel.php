@@ -15,6 +15,13 @@ use Boot\Foundation\Bootstrappers\LoadSession;
 class HttpKernel extends Kernel
 {
     /**
+     * Injectable Form Request Validators
+     *
+     * @var array
+     */
+    public array $requests = [];
+
+    /**
      * Global Middleware
      *
      * @var array

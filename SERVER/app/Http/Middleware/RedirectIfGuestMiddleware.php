@@ -10,7 +10,7 @@ class RedirectIfGuestMiddleware
 {
     public function __invoke(Request $request, Handle $handler)
     {
-        if (Auth::guest()) {
+        if (Auth::isNotConnected()) {
             return redirect('/login');
         }
 

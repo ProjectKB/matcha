@@ -24,8 +24,6 @@ class RequestInput
 
     public function all()
     {
-        $this->forget('csrf_value');
-        $this->forget('csrf_name');
         return $this->attributes;
     }
 

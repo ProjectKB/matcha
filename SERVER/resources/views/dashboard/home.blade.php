@@ -6,5 +6,5 @@
 
 @section('content')
     <h1>Home Dashboard!</h1>
-    <h2>Welcome {{ $user->firstName }}</h2>
+    <h2>Welcome {{ $user['email'] }}</h2>
 @endsection

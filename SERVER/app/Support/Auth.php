@@ -8,55 +8,39 @@ class Auth
 {
     public static function attempt($email, $password)
     {
-        $user = new User();
-        if (!$user->find_by(['email' => $email]))
-        {
-            return false;
-        }
+        $user = (new User())->find_by(['email' => $email, 'password' => $password]);
 
-        if ($password !== $user->password) {
-            return false;
-        }
+        if (!$user) return false;
 
-        $_SESSION['user'] = [
-            'id' => $user->id,
-            'email' => $user->email,
-            'password' => $user->password,
-        ];
+        $id = $user->id;
+        $email = $user->email;
+        $password = $user->password;
+
+        session()->set('user', compact('id', 'email', 'password'));
 
         return true;
     }
 
     public static function logout()
     {
-        $_SESSION['user'] = [
-            'id' => null,
-            'email' => null,
-            'password' => null,
-        ];
-
-        return self::guest();
+        session()->remove('user');
     }
 
     public static function user()
     {
-        $userInSession = isset($_SESSION['user']);
+        if (!session()->has('user')) return false;
 
-        if (!$userInSession) {
-            return false;
-        }
+        return session()->get('user');
 
-        $user = new User();
-        return $user->find_by($_SESSION['user']);
     }
 
-    public static function check(): bool
+    public static function isConnected(): bool
     {
-        return (bool) self::user();
+        return session()->has('user');
     }
 
-    public static function guest(): bool
+    public static function isNotConnected(): bool
     {
-        return !self::check();
+        return !self::isConnected();
     }
 }
