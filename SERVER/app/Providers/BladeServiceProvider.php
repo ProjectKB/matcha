@@ -11,7 +11,7 @@ class BladeServiceProvider extends ServiceProvider
 {
     public function directives($blade)
     {
-        // Add custom blade directives
+        $blade->directive('old', fn () => '<?php app()->bind("old_input", session()->flash()->get("old")); ?>');
     }
 
     public function register()

@@ -25,7 +25,7 @@ class Validator
                     }
                 } else {
                     if (!$this->$rule($input[$key])) {
-                        $this->setErrors($translator->translate('validation', $rule, $input[$key]));
+                        $this->setErrors($translator->translate('validation', $rule, $key));
                     }
                 }
             }

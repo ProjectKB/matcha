@@ -15,8 +15,6 @@ class Auth
         }
 
         if ($password !== $user->password) {
-            dd("Not the proper password, can't log you in");
-
             return false;
         }
 

@@ -9,22 +9,27 @@
         <form method="POST" action="/register">
             <h1>Register</h1>
             {!! csrf_input() !!}
+            @old
             <input
                     required
                     type="text"
                     name="first_name"
+                    value="{{ old("first_name")  }}"
                     placeholder="First Name"
             />
             <input
                     required
                     type="text"
                     name="last_name"
+                    value="{{ old("last_name")  }}"
+
                     placeholder="Last Name"
             />
             <input
                     required
                     type="email"
                     name="email"
+                    value="{{ old("email")  }}"
                     placeholder="Email"
             />
             <input

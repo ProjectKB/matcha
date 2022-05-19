@@ -90,6 +90,19 @@ if (!function_exists('collect')) {
     }
 }
 
+if (!function_exists('old')) {
+    function old($key)
+    {
+        $input = app()->resolve('old_input');
+
+        $field = collect($input)->filter(fn ($value, $field) => $key == $field);
+
+        if (isset($field[$key])) {
+            return $field[$key];
+        }
+    }
+}
+
 if (!function_exists('factory')) {
     function factory($model, $count = 1)
     {

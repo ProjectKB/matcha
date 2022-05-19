@@ -28,7 +28,12 @@ class Session extends SymfonySession
         if ($validator->fails()) {
             $this->flash()->set(
                 'errors',
-                collect($validator->getErrors())
+                $validator->getErrors()
+            );
+
+            $this->flash()->set(
+                'old',
+                $input
             );
         }
 
