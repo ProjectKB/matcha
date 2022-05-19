@@ -16,16 +16,16 @@ class RegisterController
 
     public function store(RequestInput $input, User $user)
     {
-        if ($input->password != $input->confirm_password) {
-            dd("Password and Confirm Password Do Not Match");
-        }
+        $validator = session()->validator($input->all(), [
+            'email' => 'unique:users,email|email|required',
+            'password' => 'required_with:confirm_password|same:confirm_password|min:5',
+            'confirm_password' => 'string|required',
+        ]);
+
+        if ($validator->fails()) return back();
 
         $input->forget('confirm_password');
         $input->password = sha1($input->password);
-
-        if ($user->find_by(['email' => $input->email])) {
-            dd("This email already exist.");
-        }
 
         $user->create($input->all());
 

@@ -1,0 +1,6 @@
+email: '":attribute" must be a valid email'
+string: '":attribute" must be a string'
+required: '":attribute" is a required field'
+unique: ':attribute already exist'
+min: 'minimum :attribute characters'
+max: 'maximum :attribute characters'

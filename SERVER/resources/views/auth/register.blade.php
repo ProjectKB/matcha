@@ -8,11 +8,12 @@
     <div>
         <form method="POST" action="/register">
             <h1>Register</h1>
+            {!! csrf_input() !!}
             <input
                     required
-                type="text"
-                name="first_name"
-                placeholder="First Name"
+                    type="text"
+                    name="first_name"
+                    placeholder="First Name"
             />
             <input
                     required

@@ -14,7 +14,6 @@ class BladeServiceProvider extends ServiceProvider
         // Add custom blade directives
     }
 
-
     public function register()
     {
         $this->app->bind(

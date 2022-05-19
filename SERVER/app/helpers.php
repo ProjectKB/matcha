@@ -1,10 +1,78 @@
 <?php
 
 use App\Support\Redirect;
+use App\Support\RequestInput;
+use App\Support\Validator;
+use Boot\Foundation\Http\Session;
+use Boot\Foundation\Http\ValidatorFactory;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
+
+if (!function_exists('back')) {
+    function back()
+    {
+        $route = app()->resolve(RequestInput::class);
+        $back = $route->getCurrentUri();
+
+        return redirect($back);
+    }
+}
+
+if (!function_exists('session')) {
+    function session($key = false, $value = false)
+    {
+        $session = app()->resolve(Session::class);
+
+        if (!$key) {
+            return $session;
+        }
+
+        if (!$value) {
+            return $session->get($key);
+        }
+
+        $session->set($key, $value);
+
+        return $session;
+    }
+}
+
+if (!function_exists('validator')) {
+    function validator(array $input, array $rules)
+    {
+        $validator = app()->resolve(Validator::class);
+        $validator->make($input, $rules);
+
+        return $validator;
+    }
+}
+
+if (!function_exists('csrf_input')) {
+    function csrf_input(): string
+    {
+        $token = app()->resolve('csrf');
+        $stub = "<input type='hidden' name='{replace}' value='{replace}' />";
+
+        $csrf_value_input = Str::of($stub)->replaceArray('{replace}', [
+            $token->getTokenValueKey(),
+            $token->getTokenValue()
+        ]);
+
+        $csrf_name_input = Str::of($stub)->replaceArray('{replace}', [
+            $token->getTokenNameKey(),
+            $token->getTokenName()
+        ]);
+
+        $stub = '{replace}{replace}';
+
+        return Str::of($stub)->replaceArray('{replace}', [
+            $csrf_value_input,
+            $csrf_name_input
+        ]);
+    }
+}
 
 if (!function_exists('redirect')) {
     function redirect(string $to)
@@ -67,6 +135,13 @@ if (!function_exists('config_path')) {
     function config_path($path = '')
     {
         return base_path("config/{$path}");
+    }
+}
+
+if (!function_exists('languages_path')) {
+    function languages_path($path = '')
+    {
+        return base_path("languages/{$path}");
     }
 }
 

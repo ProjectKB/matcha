@@ -15,10 +15,19 @@ class LoginController
 
     public function store(RequestInput $input)
     {
-        $successful = Auth::attempt($input->email, sha1($input->password));
-        if (!$successful) {
-            dd("Unsuccessful Login Attempt");
+        $validator = session()->validator($input->all(), [
+            'email' => 'string|email|required',
+            'password' => 'required',
+        ]);
+
+        if ($validator->fails()) return back();
+
+        if (!Auth::attempt($input->email, sha1($input->password))) {
+            session()->flash()->set('errors', ['Log in failed']);
+
+            return back();
         }
+
 
         return redirect('/home');
     }

@@ -5,8 +5,10 @@
 @endsection
 
 @section('content')
+    @include('sections.errors')
     <div>
         <form method="POST" action="/login">
+            {!! csrf_input() !!}
             <h1>Login</h1>
             <input
                     required
