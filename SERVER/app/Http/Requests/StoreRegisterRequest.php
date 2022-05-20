@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Http\Requests;
@@ -16,9 +15,11 @@ class StoreRegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'unique:users,email|email|required',
-            'password' => 'required_with:confirm_password|same:confirm_password|min:5',
-            'confirm_password' => 'string|required'
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'unique|required',
+            'password' => 'required',
+            'confirm_password' => 'required'
         ];
     }
 }

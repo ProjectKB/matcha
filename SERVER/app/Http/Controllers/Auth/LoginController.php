@@ -20,13 +20,9 @@ class LoginController
     {
         if ($input->failed()) return back();
 
-        $successful = Auth::attempt($input->email, sha1($input->password));
-
-        if ($successful) return redirect('/home');
-
-        session()->flash()->set('errors', ['Log in failed']);
-
-        return back();
+        return Auth::attempt($input->email, $input->password)
+            ? redirect('/home')
+            : back();
     }
 
     public function logout()

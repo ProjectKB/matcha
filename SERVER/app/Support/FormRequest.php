@@ -21,10 +21,7 @@ class FormRequest extends RequestInput
             return back();
         }
 
-        return false;
-//        if ($this->validator->passes()) {
-//            return $this->afterValidationPasses();
-//        }
+        $this->afterValidationPasses();
 
 //        $this->afterValidation();
     }

@@ -10,7 +10,10 @@ class Auth
     {
         $user = (new User())->find_by(['email' => $email, 'password' => $password]);
 
-        if (!$user) return false;
+        if (!$user) {
+            session()->flash()->set('errors', ['Log in failed']);
+            return false;
+        }
 
         $id = $user->id;
         $email = $user->email;
