@@ -9,6 +9,7 @@ use Boot\Foundation\Bootstrappers\LoadDebuggingPage;
 use Boot\Foundation\Bootstrappers\LoadEnvironmentDetector;
 use Boot\Foundation\Bootstrappers\LoadEnvironmentVariables;
 use Boot\Foundation\Bootstrappers\LoadHttpMiddleware;
+use Boot\Foundation\Bootstrappers\LoadMailable;
 use Boot\Foundation\Bootstrappers\LoadServiceProviders;
 use Boot\Foundation\Bootstrappers\LoadSession;
 
@@ -45,6 +46,7 @@ class HttpKernel extends Kernel
         LoadCsrf::class,
         LoadHttpMiddleware::class,
         LoadBladeTemplates::class,
+        LoadMailable::class,
         LoadServiceProviders::class,
     ];
 }

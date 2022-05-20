@@ -14,7 +14,10 @@
     "fzaninotto/faker": "^1.5",
     "slim/csrf": "^1.2",
     "illuminate/validation": "^8.0",
-    "symfony/yaml": "^5.0"
+    "symfony/yaml": "^5.0",
+    "swiftmailer/swiftmailer": "^6.3",
+    "guzzlehttp/guzzle": "^7.4",
+    "illuminate/mail": "^8.0"
   },
   "autoload": {
     "files": [

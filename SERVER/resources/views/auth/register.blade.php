@@ -46,6 +46,11 @@
                     placeholder="Confirm Password"
             />
             <button type="submit">Register</button>
+            <div>
+                <a href="/login">
+                    Already Registered? Login
+                </a>
+            </div>
         </form>
     </div>
 @endsection

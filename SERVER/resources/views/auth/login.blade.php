@@ -26,6 +26,18 @@
                     placeholder="Password"
             />
             <button type="submit">Login</button>
+            <div>
+                <div>
+                    <a href="/register">
+                        You're new? Register
+                    </a>
+                </div>
+                <div>
+                    <a href="/reset-password">
+                        Forgot Password?
+                    </a>
+                </div>
+            </div>
         </form>
     </div>
 @endsection
