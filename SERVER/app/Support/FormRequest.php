@@ -33,7 +33,7 @@ class FormRequest extends RequestInput
 
     protected function afterValidationPasses()
     {
-        //
+        session()->flash()->set('success', ['Success!']);
     }
 
     protected function afterValidationFails()

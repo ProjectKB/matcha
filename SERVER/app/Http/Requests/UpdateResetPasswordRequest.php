@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class StoreLoginRequest extends FormRequest
+class UpdateResetPasswordRequest extends FormRequest
 {
     protected function afterValidationPasses()
     {
@@ -14,8 +14,8 @@ class StoreLoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email',
-            'password' => 'required|string'
+            'password' => 'required',
+            'confirm_password' => 'required',
         ];
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http;
 use App\Http\Middleware\RouteContextMiddleware;
 use App\Http\Requests\StoreLoginRequest;
 use App\Http\Requests\StoreRegisterRequest;
+use App\Http\Requests\StoreResetPasswordRequest;
+use App\Http\Requests\UpdateResetPasswordRequest;
 use Boot\Foundation\HttpKernel as Kernel;
 
 class HttpKernel extends Kernel
@@ -17,6 +19,8 @@ class HttpKernel extends Kernel
     public array $requests = [
         StoreLoginRequest::class,
         StoreRegisterRequest::class,
+        StoreResetPasswordRequest::class,
+        UpdateResetPasswordRequest::class,
     ];
 
     /**

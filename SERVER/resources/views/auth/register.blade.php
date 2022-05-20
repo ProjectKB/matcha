@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    @include('sections.errors')
     <div>
         <form method="POST" action="/register">
             <h1>Register</h1>

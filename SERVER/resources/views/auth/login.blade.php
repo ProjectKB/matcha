@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    @include('sections.errors')
     <div>
         <form method="POST" action="/login">
             {!! csrf_input() !!}

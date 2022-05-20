@@ -27,4 +27,9 @@ class User extends BaseModel
             "updatedAt" => "updated_at"
         ];
     }
+
+    public function getTableName(): string
+    {
+        return 'users';
+    }
 }

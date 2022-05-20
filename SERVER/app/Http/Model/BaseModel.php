@@ -21,7 +21,7 @@ abstract class BaseModel
         $query_columns = "";
 
         foreach ($columns as $key => $value) {
-            $query_columns .= (++$i != $size) ? "{$key}='{$value}' AND " : "{$key}='{$value}'";
+            $query_columns .= (++$i != $size) ? "`{$key}`='{$value}' AND " : "`{$key}`='{$value}'";
         }
 
         $response = DB::$db->query("SELECT * FROM " . $this->getTableName() . " WHERE {$query_columns}");
@@ -38,13 +38,34 @@ abstract class BaseModel
     final public function create($elements)
     {
         $values = array_map(fn($elem) => "'{$elem}'", array_values($elements));
+        $columns = array_map(fn($elem) => "`{$elem}`", array_keys($elements));
         $query = "INSERT INTO {$this->getTableName()} ("
-            . implode(',', array_keys($elements)) . ") VALUES ("
+            . implode(',', $columns) . ") VALUES ("
             . implode(',', $values) . ")";
 
         DB::$db->query($query);
 
         return $this->make($elements);
+    }
+
+    final public function update(array $elements)
+    {
+        $tmp = "";
+        foreach ($elements as $column => $value) {
+            $tmp.="`{$column}` = '{$value}', ";
+        }
+
+        $toUpdate = substr($tmp, 0, -2);
+        $query = "UPDATE {$this->getTableName()} SET {$toUpdate} WHERE id={$this->id}";
+
+        DB::$db->query($query);
+
+        return $this->make($elements);
+    }
+
+    final public function delete($column, $value)
+    {
+        DB::$db->query("DELETE FROM {$this->getTableName()} WHERE `{$column}`='{$value}'");
     }
 
     final public function make(array $fetchedValues)
@@ -58,10 +79,6 @@ abstract class BaseModel
         return $this;
     }
 
-    final public function getTableName()
-    {
-        return strtolower(class_basename($this)) . "s";
-    }
-
+    abstract public function getTableName(): string;
     abstract public function getFillable();
 }

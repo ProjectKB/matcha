@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('sections.errors')
     <div>
         <form method="POST" action="/reset-password">
             {!! csrf_input() !!}
-
+            @old
             <input
                     name="email"
                     value="{{ old('email') }}"

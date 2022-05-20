@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('sections.errors')
-
     <div>
         <div>
             <h1>Reset Password Link Sent</h1>

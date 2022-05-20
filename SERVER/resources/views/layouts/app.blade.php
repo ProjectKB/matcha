@@ -8,6 +8,7 @@
     <title>@yield('title')</title>
 </head>
 <body>
+    @include('sections.flash.messages')
     <div>
         @yield('content')
     </div>
