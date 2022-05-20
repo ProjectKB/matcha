@@ -4,21 +4,6 @@ use App\Support\Route;
 use App\Http\Middleware\RedirectIfAuthenticatedMiddleware as RedirectIfAuthenticated;
 use App\Http\Middleware\RedirectIfGuestMiddleware as RedirectIfGuest;
 use App\Support\View;
-use Boot\Foundation\Mail\Mailable;
-
-Route::get('/test', function (Mailable $mail, $response) {
-    $url = config('app.url') . '/reset-password/unique-key';
-
-    $successful = $mail->subject('Reset Password Link')
-        ->from('admin@matcha.com', 'Matcha')
-        ->to('test@example.com')
-        ->view('mail.auth.reset', compact('url'))
-        ->send();
-
-    $response->getBody()->write("Successfully send email: {$successful}");
-
-    return $response;
-});
 
 Route::get('/', fn(View $view) => $view('welcome'));
 
