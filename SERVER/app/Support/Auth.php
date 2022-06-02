@@ -37,6 +37,20 @@ class Auth
 
     }
 
+    public static function isCompleted(): bool
+    {
+        if (!session()->has('user')) return false;
+
+        return session()->get('user')->completed;
+    }
+
+    public static function isConfirmed(): bool
+    {
+        if (!session()->has('user')) return false;
+
+        return session()->get('user')->confirmed;
+    }
+
     public static function isConnected(): bool
     {
         return session()->has('user');
