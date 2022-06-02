@@ -6,9 +6,9 @@ use App\Http\Model\User;
 
 class Auth
 {
-    public static function attempt($email, $password)
+    public static function attempt($username, $password)
     {
-        $user = (new User())->find_by(['email' => $email, 'password' => $password]);
+        $user = (new User())->find_by(['username' => $username, 'password' => $password]);
 
         if (!$user) {
             session()->flash()->set('errors', ['Log in failed']);

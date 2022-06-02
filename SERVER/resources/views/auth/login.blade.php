@@ -16,10 +16,9 @@
 
             <input
                     {{--                    required--}}
-                    {{--                    type="email"--}}
-                    name="email"
-                    value="{{ old('email') }}"
-                    placeholder="Email"
+                    name="username"
+                    value="{{ old('username') }}"
+                    placeholder="Username"
             />
 
             <input
