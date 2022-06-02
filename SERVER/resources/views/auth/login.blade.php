@@ -7,9 +7,13 @@
 @section('content')
     <div>
         <form method="POST" action="/login">
+
             {!! csrf_input() !!}
+
             @old
+
             <h1>Login</h1>
+
             <input
                     {{--                    required--}}
                     {{--                    type="email"--}}
@@ -17,6 +21,7 @@
                     value="{{ old('email') }}"
                     placeholder="Email"
             />
+
             <input
                     {{--                    required--}}
                     {{--                    type="password"--}}
@@ -24,7 +29,9 @@
                     value="{{ old('password') }}"
                     placeholder="Password"
             />
+
             <button type="submit">Login</button>
+
             <div>
                 <div>
                     <a href="/register">
@@ -37,6 +44,7 @@
                     </a>
                 </div>
             </div>
+
         </form>
     </div>
 @endsection

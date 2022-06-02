@@ -17,10 +17,12 @@ class StoreRegisterRequest extends FormRequest
     public function rules()
     {
         return [
+            'username' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'unique|required',
-            'password' => 'required',
+            'birthdate' => 'adult|required',
+            'password' => 'required|same',
             'confirm_password' => 'required'
         ];
     }

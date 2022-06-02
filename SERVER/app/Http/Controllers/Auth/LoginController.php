@@ -7,7 +7,6 @@ use App\Support\View;
 use Auth;
 use function back;
 use function redirect;
-use function session;
 
 class LoginController
 {

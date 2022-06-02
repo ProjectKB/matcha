@@ -23,6 +23,10 @@ class Validator
                     if (!$this->$rule($input[$key], $limit)) {
                         $this->setErrors($translator->translate('validation', $rule, $limit));
                     }
+                } else if (str_contains($rule, 'same')) {
+                    if (!$this->$rule($input[$key], $input["confirm_password"])) {
+                        $this->setErrors($translator->translate('validation', $rule));
+                    }
                 } else {
                     if (!$this->$rule($input[$key])) {
                         $this->setErrors($translator->translate('validation', $rule, $key));
@@ -65,6 +69,16 @@ class Validator
     private function string(string $input): bool
     {
         return true;
+    }
+
+    private function same(string $password, string $confirm_password): bool
+    {
+        return $password == $confirm_password;
+    }
+
+    private function adult(string $input): bool
+    {
+        return strtotime($input) <= strtotime('18 years ago');
     }
 
     public function getErrors(): array

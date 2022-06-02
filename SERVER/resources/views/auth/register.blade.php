@@ -6,50 +6,76 @@
 
 @section('content')
     <div>
+        <h1>Register</h1>
         <form method="POST" action="/register">
-            <h1>Register</h1>
+
             {!! csrf_input() !!}
+
             @old
+
             <input
-{{--                    required--}}
+                    {{--                    required--}}
+                    type="text"
+                    name="username"
+                    value="{{ old("username")  }}"
+                    placeholder="User Name"
+            />
+
+            <input
+                    {{--                    required--}}
                     type="text"
                     name="first_name"
                     value="{{ old("first_name")  }}"
                     placeholder="First Name"
             />
+
             <input
-{{--                    required--}}
+                    {{--                    required--}}
                     type="text"
                     name="last_name"
                     value="{{ old("last_name")  }}"
 
                     placeholder="Last Name"
             />
+
             <input
-{{--                    required--}}
+                    {{--                    required--}}
                     type="email"
                     name="email"
                     value="{{ old("email")  }}"
                     placeholder="Email"
             />
+
             <input
-{{--                    required--}}
+                    {{--                    required--}}
+                    type="date"
+                    name="birthdate"
+                    value="{{ old("birthdate")  }}"
+                    placeholder="Birthdate"
+            />
+
+            <input
+                    {{--                    required--}}
                     type="password"
                     name="password"
                     placeholder="Password"
             />
+
             <input
-{{--                    required--}}
+                    {{--                    required--}}
                     type="password"
                     name="confirm_password"
                     placeholder="Confirm Password"
             />
+
             <button type="submit">Register</button>
+
             <div>
                 <a href="/login">
                     Already Registered? Login
                 </a>
             </div>
+
         </form>
     </div>
 @endsection
