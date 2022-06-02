@@ -17,7 +17,7 @@ class Translator
         array_walk($files, fn ($file) => $this->translations[str_replace(".yaml", "", $file)] = Yaml::parseFile("$path/$file"));
     }
 
-    public function translate(string $category, string $key, string $attribute): string
+    public function translate(string $category, string $key, string $attribute = ''): string
     {
         return str_replace(':attribute', $attribute, $this->translations[$category][$key]);
     }
