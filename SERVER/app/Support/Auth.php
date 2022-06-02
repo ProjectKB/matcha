@@ -11,7 +11,9 @@ class Auth
         $user = (new User())->find_by(['username' => $username, 'password' => $password]);
 
         if (!$user) {
+            session()->flash()->set('success', []);
             session()->flash()->set('errors', ['Log in failed']);
+
             return false;
         }
 
