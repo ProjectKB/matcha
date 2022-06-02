@@ -14,9 +14,9 @@ build:
 	@cd docker && docker-compose up -d
 
 install:
-	@$(CONNECT) $(PHP) sh -c 'cd .. && composer install && composer update'
+	@$(CONNECT) $(PHP) sh -c 'cd .. && composer install --ignore-platform-reqs && composer update --ignore-platform-reqs'
 
-setup: build install dump migrate seed
+setup: build install dump migrate
 
 run:
 	@open http://localhost:8000/
