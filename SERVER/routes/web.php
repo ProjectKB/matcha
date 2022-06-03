@@ -21,3 +21,4 @@ Route::get('/home', 'DashboardController@home')->add(RedirectIfGuest::class);
 
 Route::get('/register', 'RegisterController@show')->add(RedirectIfAuthenticated::class);
 Route::post('/register', 'RegisterController@store')->add(RedirectIfAuthenticated::class);
+Route::get('/confirm-email/{key}', 'RegisterController@confirm')->add(RedirectIfAuthenticated::class);

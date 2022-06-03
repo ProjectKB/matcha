@@ -6,7 +6,7 @@ use App\Http\Model\User;
 
 class Auth
 {
-    public static function attempt($username, $password)
+    public static function attempt($username, $password, $action = '')
     {
         $user = (new User())->find_by(['username' => $username, 'password' => $password]);
 
@@ -17,11 +17,18 @@ class Auth
             return false;
         }
 
+        if ($action == "login" && !$user->confirmed) {
+            session()->flash()->set('success', []);
+            session()->flash()->set('errors', ['Please confirm your mail first']);
+            return false;
+        }
+
         $id = $user->id;
         $email = $user->email;
         $password = $user->password;
+        $confirmed = $user->confirmed;
 
-        session()->set('user', compact('id', 'email', 'password'));
+        session()->set('user', compact('id', 'email', 'password', 'confirmed'));
 
         return true;
     }
@@ -39,18 +46,18 @@ class Auth
 
     }
 
+    public static function isConfirmed(): bool
+    {
+        if (!session()->has('user')) return false;
+
+        return session()->get('user')["confirmed"];
+    }
+
     public static function isCompleted(): bool
     {
         if (!session()->has('user')) return false;
 
         return session()->get('user')->completed;
-    }
-
-    public static function isConfirmed(): bool
-    {
-        if (!session()->has('user')) return false;
-
-        return session()->get('user')->confirmed;
     }
 
     public static function isConnected(): bool

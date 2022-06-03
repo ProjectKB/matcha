@@ -52,7 +52,7 @@ abstract class BaseModel
     {
         $tmp = "";
         foreach ($elements as $column => $value) {
-            $tmp.="`{$column}` = '{$value}', ";
+            $tmp .= "`{$column}` = '{$value}', ";
         }
 
         $toUpdate = substr($tmp, 0, -2);
@@ -80,5 +80,6 @@ abstract class BaseModel
     }
 
     abstract public function getTableName(): string;
+
     abstract public function getFillable();
 }

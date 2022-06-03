@@ -53,7 +53,7 @@ class Validator
 
     private function unique(string $input): bool
     {
-        return !((bool)(new User())->find_by(['email' => $input]));
+        return !((bool)(new User())->find_by(['username' => $input]));
     }
 
     private function min(string $input, int $limit): bool

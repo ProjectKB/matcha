@@ -19,7 +19,7 @@ class LoginController
     {
         if ($input->failed()) return back();
 
-        return Auth::attempt($input->username, $input->password)
+        return Auth::attempt($input->username, $input->password, "login")
             ? redirect('/home')
             : back();
     }

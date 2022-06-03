@@ -10,7 +10,7 @@ class RedirectIfAuthenticatedMiddleware
 {
     public function __invoke(Request $request, Handle $handler)
     {
-        if (Auth::isConnected()) {
+        if (Auth::isConnected() && Auth::isConfirmed()) {
             return redirect('/home');
         }
 
