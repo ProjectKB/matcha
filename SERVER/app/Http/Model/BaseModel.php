@@ -11,6 +11,8 @@ abstract class BaseModel
         $response = DB::$db->query("SELECT * FROM " . $this->getTableName() . " WHERE id=${id}");
         $fetchedValues = mysqli_fetch_assoc($response);
 
+        if (!$fetchedValues) return false;
+
         return $this->make($fetchedValues);
     }
 

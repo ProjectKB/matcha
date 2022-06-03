@@ -3,10 +3,12 @@
 namespace App\Http;
 
 use App\Http\Middleware\RouteContextMiddleware;
+use App\Http\Requests\CompleteUserRequest;
 use App\Http\Requests\StoreLoginRequest;
 use App\Http\Requests\StoreRegisterRequest;
 use App\Http\Requests\StoreResetPasswordRequest;
 use App\Http\Requests\UpdateResetPasswordRequest;
+use App\Http\Requests\UpdateUserRequest;
 use Boot\Foundation\HttpKernel as Kernel;
 
 class HttpKernel extends Kernel
@@ -21,6 +23,8 @@ class HttpKernel extends Kernel
         StoreRegisterRequest::class,
         StoreResetPasswordRequest::class,
         UpdateResetPasswordRequest::class,
+        CompleteUserRequest::class,
+        UpdateUserRequest::class,
     ];
 
     /**

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Model\User;
+use App\Support\Auth;
 use App\Support\Redirect;
 use App\Support\RequestInput;
 use App\Support\Validator;
@@ -17,6 +19,17 @@ if (!function_exists('back')) {
         $back = $route->getCurrentUri();
 
         return redirect($back);
+    }
+}
+
+if (!function_exists('user')) {
+    function getUser()
+    {
+        $userId = Auth::user()["id"];
+
+        if (!$userId) return false;
+
+        return (new User())->find($userId);
     }
 }
 

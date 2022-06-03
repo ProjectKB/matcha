@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\RedirectIfCompleted;
+use App\Http\Middleware\RedirectIfUncompleted;
 use App\Support\Route;
 use App\Http\Middleware\RedirectIfAuthenticatedMiddleware as RedirectIfAuthenticated;
 use App\Http\Middleware\RedirectIfGuestMiddleware as RedirectIfGuest;
@@ -22,3 +24,8 @@ Route::get('/home', 'DashboardController@home')->add(RedirectIfGuest::class);
 Route::get('/register', 'RegisterController@show')->add(RedirectIfAuthenticated::class);
 Route::post('/register', 'RegisterController@store')->add(RedirectIfAuthenticated::class);
 Route::get('/confirm-email/{key}', 'RegisterController@confirm')->add(RedirectIfAuthenticated::class);
+
+Route::get('/complete', 'UserController@complete')->add(RedirectIfGuest::class)->add(RedirectIfCompleted::class);
+Route::post('/completeAction', 'UserController@completeAction')->add(RedirectIfGuest::class);
+Route::get('/update', 'UserController@update')->add(RedirectIfGuest::class)->add(RedirectIfUncompleted::class);
+Route::post('/updateAction', 'UserController@updateAction')->add(RedirectIfGuest::class);

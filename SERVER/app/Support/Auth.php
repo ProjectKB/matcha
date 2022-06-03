@@ -27,8 +27,9 @@ class Auth
         $email = $user->email;
         $password = $user->password;
         $confirmed = $user->confirmed;
+        $completed = $user->completed;
 
-        session()->set('user', compact('id', 'email', 'password', 'confirmed'));
+        session()->set('user', compact('id', 'email', 'password', 'confirmed', 'completed'));
 
         return true;
     }
@@ -57,7 +58,7 @@ class Auth
     {
         if (!session()->has('user')) return false;
 
-        return session()->get('user')->completed;
+        return session()->get('user')["completed"];
     }
 
     public static function isConnected(): bool

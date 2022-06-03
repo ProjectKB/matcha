@@ -81,6 +81,16 @@ class Validator
         return strtotime($input) <= strtotime('18 years ago');
     }
 
+    private function gender(string $input): bool
+    {
+        return in_array($input, ['man', 'woman']);
+    }
+
+    private function orientation(string $input): bool
+    {
+        return in_array($input, ['heterosexual', 'homosexual', 'bisexual']);
+    }
+
     public function getErrors(): array
     {
         return $this->errors;
